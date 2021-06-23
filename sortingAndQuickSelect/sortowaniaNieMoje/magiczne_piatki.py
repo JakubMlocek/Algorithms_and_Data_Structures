@@ -42,9 +42,9 @@ def magic_5(tab, first, last, k):
                 k)  # jeżeli liczba podziałów jest większa niż 5 to rekurencyjne wywołują funkcje magic_5 dla median
     else:
         quick_sort(tab, first, j - 1)  # w innym przypadku sortuje liste
-    pivot = (first + j) // 2  # wybieram środek listy jako pivot
-    tab[last], tab[pivot] = tab[pivot], tab[last]  # zamieniam ostatni element z pivotem aby partition ustawił za pivot przez nas wybraną miediane median
-    q = partition(tab, first, last)
+        pivot = (first + j) // 2  # wybieram środek listy jako pivot
+        tab[last], tab[pivot] = tab[pivot], tab[last]  # zamieniam ostatni element z pivotem aby partition ustawił za pivot przez nas wybraną miediane median
+        q = partition(tab, first, last)
 
     if k == q:  # Sytuacja w której znaleźliśmy miejsce elementu
         return tab[q]

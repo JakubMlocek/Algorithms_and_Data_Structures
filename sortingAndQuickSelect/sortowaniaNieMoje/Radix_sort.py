@@ -1,12 +1,12 @@
 # SORTOWANIE WYRAZÓW O TEJ SAMEJ DLUGOSCI   # O(d( n + k))  k-liczba róznych cyfr , d = liczba cyfr w liczbach,
-def radixSort1(A, numOfWords, lenOfWord): 
-    for i in range(lenOfWord-1, -1, -1):
-        for j in range(0, numOfWords):
-            currWord = 0
-            while currWord + j < numOfWords - 1:
-                if(A[currWord][i]  > A[currWord + 1][i]):
-                    A[currWord], A[currWord + 1] = A[currWord + 1], A[currWord]
-                currWord += 1
+def radix1(A, n, d):
+    for i in range(d-1, -1, -1):
+        for j in range(0, n):
+            k = 0
+            while k + j < n - 1:
+                if(A[k][i]  > A[k + 1][i]):
+                    A[k], A[k + 1] = A[k + 1], A[k]
+                k += 1
     return A
 
 # SORTOWAIE WYRAZOW O ROZNEJ DLUGOSCI

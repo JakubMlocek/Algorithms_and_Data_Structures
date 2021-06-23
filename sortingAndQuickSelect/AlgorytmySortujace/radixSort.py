@@ -19,6 +19,35 @@ def radix_sort(A, k):
         A = counting_sort_digits(A,i)
     return A
 
-T = ["abc","aaa","bbb","abo","kub"]
-print(radix_sort(T,3))
+#Radix sort using counting sort on words with different len TO BE DONE!!!!
+
+#tworzymy kubełki dla każdej z możliwych długosci słowa. Następnie kubełki sortujemy
+#idac od najdłuzszej w dół i złączamy z tymi u dołu. :D
+
+def radixSortDiffLengths(T): #TO BE COMPLEATED
+    maxLen = 0
+    for each in T:
+        if maxLen < len(each):
+            maxLen = len(each)
+    
+    buckets = []
+    for i in range(maxLen + 1):
+        buckets.append([])
+    
+    for each in T:
+        buckets[len(each)].append(each)
+
+    idxToSort = 0
+    for i in range(maxLen, -1, -1):
+        print(buckets[i], idxToSort)
+        buckets[i] = counting_sort_digits(buckets[i], idxToSort)
+        if i >= 1:
+            buckets[i - 1] += buckets[i]
+        idxToSort += 1
+    print(buckets[0])
+
+T = ["abbabs","kuba","martyna","abc","xyz","sobiejedem","jadomjadom","aedzi"]
+print(radixSortDiffLengths(T))
+
+
 

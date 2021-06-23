@@ -1,1 +1,0 @@
-wyszukujemy bin serchem czy unikatowy jesli tak to szukamy w tablicy i zwiekszamy counter

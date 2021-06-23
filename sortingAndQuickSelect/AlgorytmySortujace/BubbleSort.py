@@ -1,4 +1,4 @@
-#najprostrzy bubbleSort O(n^2)
+#najprostszy bubbleSort O(n^2)
 def bubbleSort(tablica):
     for i in range(len(tablica) - 1):
         for j in range(len(tablica) - 1 - i ):

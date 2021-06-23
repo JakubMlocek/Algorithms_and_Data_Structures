@@ -1,3 +1,9 @@
+#heapsort sorting complexity O(nlogn)
+#heapify complexity O(logn)
+#buildheap complexity O(nlogn) --> O(n)
+
+#TO BE DONE HEAP MIN !!!!
+
 def left(i):
      return 2*i + 1
 
@@ -7,18 +13,14 @@ def right(i):
 def parent(i):
     return (i - 1) // 2
 
-
 def heapify_max( A, n, i ):
     l = left(i)
     r = right(i)
     m = i
-
     if l < n and A[l] > A[m]:
         m = l
-
     if r < n and A[r] > A[m]:
         m = r
-
     if m != i:
         A[i], A[m] = A[m], A[i]
         heapify_max(A,n,m)
@@ -27,13 +29,10 @@ def heapify_min( A, n, i ):
     l = left(i)
     r = right(i)
     m = i
-
     if l < n and A[l] < A[m]:
         m = l
-
     if r < n and A[r] < A[m]:
         m = r
-
     if m != i:
         A[i], A[m] = A[m], A[i]
         heapify_min(A,n,m)
@@ -64,7 +63,6 @@ def heapsort_min( A ):
 
 def insert_into_heap_max( A , val):
     A.append(val)
-
     i = len(A) - 1
     j = parent(i)
     while A[j] < A[i] and j >= 0:
@@ -75,7 +73,7 @@ def insert_into_heap_max( A , val):
 
     return A
 
-def pop_from_heap( A ):
+def pop_from_heap_max( A ):
     val = A[0]
     n = len( A )
     A[0] , A[n - 1] = A[n - 1], A[0]
@@ -86,3 +84,5 @@ def pop_from_heap( A ):
 T = [9,3,1,5,3,12,34,6,3,1,35,76]
 heapsort_min( T )
 print(T)
+
+

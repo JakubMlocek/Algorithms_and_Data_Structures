@@ -1,2 +1,0 @@
-zamieniamy liczby na liczby w systemie o podstawie n
-radix sort

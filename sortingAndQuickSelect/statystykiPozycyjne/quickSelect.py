@@ -18,6 +18,6 @@ def quickSelect(A, p, r, k):
     if q == k:
         return A[k]
     elif k < q:
-        return quick_select(A, p, q - 1, k)
+        return quickSelect(A, p, q - 1, k)
     else:
-        return quick_select(A, q + 1, r, k)
+        return quickSelect(A, q + 1, r, k)

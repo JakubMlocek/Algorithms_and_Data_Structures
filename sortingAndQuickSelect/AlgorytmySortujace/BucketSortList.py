@@ -1,4 +1,4 @@
-#bucketSort on list O(n) if assumptions achieved
+#bucketSort on list O(n + k) if assumptions achieved
 
 class Node:
     def __init__(self):

@@ -16,8 +16,8 @@ def QuickerSort(f):
     small = smaller
     equal = Node()
     eq = equal
-    bigger = Node()
-    big = bigger
+    greater = Node()
+    great = greater
 
     pivot = f.val
     while f is not None:
@@ -25,24 +25,21 @@ def QuickerSort(f):
             small.next = f
             small = small.next
             eq.next = None
-            big.next = None
+            great.next = None
         elif f.val == pivot:
             eq.next = f
             eq= eq.next
             small.next = None
-            big.next = None
+            great.next = None
         else:
-            big.next = f
-            big = big.next
+            great.next = f
+            great = great.next
             eq.next = None
             small.next = None
         f = f.next
-    # printlist(smaller.next)
-    # printlist(equal.next)
-    # printlist(bigger.next)
-    return sklejanie(QuickerSort(smaller.next), equal.next, QuickerSort(bigger.next))
+    return merge(QuickerSort(smaller.next), equal.next, QuickerSort(greater.next))
 
-def sklejanie(smaller, equal, bigger):
+def merge(smaller, equal, greater):
     tmp = smaller
     while smaller is not None and tmp.next is not None:
         tmp = tmp.next
@@ -53,8 +50,8 @@ def sklejanie(smaller, equal, bigger):
 
     if smaller is not None:
         tmp.next = equal
-        tmp2.next = bigger
+        tmp2.next = greater
         return smaller
     else:
-        tmp2.next = bigger
+        tmp2.next = greater
         return equal

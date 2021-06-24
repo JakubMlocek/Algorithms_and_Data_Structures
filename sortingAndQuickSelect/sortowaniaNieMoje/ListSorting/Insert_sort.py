@@ -8,7 +8,7 @@ def add(lista, w):
     p.next = lista
     return p
 
-def wypisywanie(f):
+def printlist(f):
     while f is not None:
         print(f.val, end=" ")
         f = f.next
@@ -33,14 +33,3 @@ def insertion_sort(f):
             curr.next = search.next
             search.next = curr
     return f1
-
-if __name__ == '__main__':
-    lista = None
-    lista = add(lista, 2)
-    lista = add(lista, 8)
-    lista = add(lista, 5)
-    lista = add(lista, 9)
-    lista = add(lista, 1)
-    wypisywanie(lista)
-    lista = insertion_sort(lista)
-    wypisywanie(lista)

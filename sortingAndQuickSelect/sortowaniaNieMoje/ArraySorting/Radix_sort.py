@@ -4,10 +4,29 @@ def radix1(A, n, d):
         for j in range(0, n):
             k = 0
             while k + j < n - 1:
-                if(A[k][i]  > A[k + 1][i]):
+                if A[k][i] > A[k + 1][i]:
                     A[k], A[k + 1] = A[k + 1], A[k]
                 k += 1
     return A
+
+def counting_sort_digits(A,letter_num):
+    k = 2 #mamy tylko dwie litery a i b
+    C = [0] * k
+    B = [0]*len(A)
+    for i in range(len(A)):
+        C[ord(A[i][letter_num]) - ord('a')] += 1
+    for i in range(1, k):
+        C[i] += C[i-1]
+    for i in range(len(A)-1, -1, -1):
+        C[ord(A[i][letter_num]) - ord('a')] -= 1
+        B[C[ord(A[i][letter_num]) - ord('a')]] = A[i]
+    return B
+
+def radix_sort(A, k):
+    for i in range(k - 1, -1, -1):
+        A = counting_sort_digits(A,i)
+    return A
+
 
 # SORTOWAIE WYRAZOW O ROZNEJ DLUGOSCI
 

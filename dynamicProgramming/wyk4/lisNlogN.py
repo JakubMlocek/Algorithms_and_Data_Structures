@@ -1,9 +1,5 @@
-# Python program to find
-# length of longest
-# increasing subsequence
-# in O(n Log n) time
-  
-# Binary search (note
+#O(n Log n) time
+ # Binary search (note
 # boundaries in the caller)
 # A[] is ceilIndex
 # in the caller

@@ -38,7 +38,7 @@ def radixSortDiffLengths(T): #TO BE COMPLEATED
         buckets[len(each)].append(each)
 
     idxToSort = 0
-    for i in range(maxLen, -1, -1):
+    for i in range(maxLen - 1, -1, -1):
         print(buckets[i], idxToSort)
         buckets[i] = counting_sort_digits(buckets[i], idxToSort)
         if i >= 1:

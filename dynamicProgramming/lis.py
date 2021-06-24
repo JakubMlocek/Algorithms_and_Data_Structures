@@ -1,5 +1,5 @@
-    #f(i) = dl najdluzszego podciagu rosnacego konczacego sie na A[i]
-
+#Longest increasing subsequence
+#f(i) = dl najdluzszego podciagu rosnacego konczacego sie na A[i]
 #O( n^2 )
 def lis( A ):
     n = len( A )

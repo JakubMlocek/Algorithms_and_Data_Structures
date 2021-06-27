@@ -35,57 +35,21 @@ def quick_select(A, p, r, k):
 
 def Median(T):
     n = len(T)
-    
-    linear_tab = [] #linearyzujemy nasza tablice
-    for i in range( n * n ):
-        y = i // n #wiersz
-        x = i % n #kolumna
-        linear_tab.append(T[y][x])
-    
 
-    n2 = len(linear_tab)
-    
-    sr = n2 // 2
-    if n2 % 2 == 1: #tworze index od ktorego zaczynaja sie srodkowe elementy w tablicy
-        index_begin_of_median = sr - (n // 2)
-    else:
-        index_begin_of_median = sr - (n // 2) + 1
-    
-    result = [[0]*n for i in range(n)]
-    indeks_inkrement = 0 #ktora obecnie wsadzana mediana
-    for i in range(0,n2,n + 1): #za pomoca funkcji quickselect znajdujemy elementy ktore powinny byc na pozycji median i wkladamy je do tablicy
-        y, x = divmod(i, n)
-        result[y][x] = quick_select(linear_tab, 0, len(linear_tab) - 1, index_begin_of_median + indeks_inkrement)
-        indeks_inkrement += 1
+    linearT = []
+    for each in T:
+        linearT += each
 
-    min_median = quick_select(linear_tab, 0, len(linear_tab) - 1, index_begin_of_median) #wyznaczam najmniejsza i najwieksza mediane
-    max_median = quick_select(linear_tab, 0, len(linear_tab) - 1, index_begin_of_median + n - 1)
+    minOfDiagonal = quick_select(linearT,0,len(linearT)-1, (len(linearT) - n) // 2 + 1)
+    maxOfDiagonal = quick_select(linearT,0,len(linearT)-1, (len(linearT) - n) // 2 + n - 1)
 
-    
-    tab_of_mins = []
-    tab_of_maxs = []
-
-    for i in range( n2 ):  #dodaje elementy do odpowiednio tablicy z mniejszymi i wiekszymi elementami
-        if linear_tab[i] > max_median:
-            tab_of_maxs.append(linear_tab[i])
-        elif linear_tab[i] < min_median:
-            tab_of_mins.append(linear_tab[i])
-    
-    min_it = 0
-    max_it = 0
-    for i in range( n2 ): #wrzucam elementy we własciwe miejsce
-        y, x = divmod(i, n)
-        if y > x:
-            result[y][x] = tab_of_mins[min_it]
-            min_it += 1
-        elif y < x:
-            result[y][x] = tab_of_maxs[max_it] 
-            max_it += 1  
-
-    return result
+    print(minOfDiagonal, maxOfDiagonal)    
 
 
+T = [ [ 2, 3, 5],
+[ 7,11,13],
+[17,19,23] ]
+print(Median(T))
 
 
-
-runtests( Median ) 
+#runtests( Median ) 

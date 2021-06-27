@@ -1,14 +1,77 @@
-#Jakub Młocek
+"""
+W roku 2050 Maksymilian odbywa podróż przez pustynię z miasta A do miasta B. Droga pomiędzy
+miastami jest linią prostą na której w pewnych miejscach znajdują się plamy ropy. Maksymilian
+porusza się 24 kołową cysterną, która spala 1 litr ropy na 1 kilometr trasy. Cysterna wyposażona
+jest w pompę pozwalającą zbierać ropę z plam. Aby dojechać z miasta A do miasta B Maksymilian
+będzie musiał zebrać ropę z niektórych plam (by nie zabrakło paliwa), co każdorazowo wymaga
+zatrzymania cysterny. Niestety, droga jest niebezpieczna. Maksymilian musi więc tak zaplanować
+trasę, by zatrzymać się jak najmniej razy. Na szczęście cysterna Maksymiliana jest ogromna - po
+zatrzymaniu zawsze może zebrać całą ropę z plamy (w cysternie zmieściłaby się cała ropa na trasie)
+"""
+
+from zad3testy import runtests
+
+def DFS(G):
+    visited = [False] * len(G)
+    parent = [-1] * len(G)
+    def DFSvisit(G, u):
+        visited[u] = True
+        for each in G[u]:
+            if not visited[each]:
+                parent[each] = u
+                DFSvisit(G, each)
+
+    for each in range(len(G)):
+        if not visited[each]:
+            DFSvisit(G, each)
+
+def transformToGraph(T):
+    n = len(T)
+    m = len(T[0])
+    #T[i][j] --> A[i * m + j]
+    A = [[] * (n * m + 1)]
+     
+
+def plan(T):
+    #"zbieramy" ropę do tablicy jednowymiarowej
+
+
+T = [
+    [1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 0, 1],
+    [1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 0, 1],
+    [0, 0, 1, 0, 1, 0, 1, 0, 1, 1, 1, 1],
+    [0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0],
+    [0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0],
+    [0, 0, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+]
+
+
+#runtests(plan)
+
+
+
+
+
+
+
+
+
+
+
+
+
+"""ATTEMPT ON KOL
 #algorytm "zbiera plamy" do pierwszego wiersza tablicy. Mając w pierwszym wierszu tablicy wartość
 #mozliwej do zatankowania ropy poruszamy się zachłannie jak w problemie z czołgiem. Znajdujemy w zasięgu
 #naszego baku stację która pozwoli nam przemieścić się najdalej. Końcowo uzyskujemy optymalny wynik.
 #zauważmy iż algorytm działa poprawnie ponieważ gdybyśmy wybrali stacje z naszego zasięgu która nie pozwala
 #nam dojechać jak najdalej to potencjalnie zmuszeni bylibyśmy do zatrzymania się na większej liczbie stacji
-
-#zlozonosc optymistyczna O(n^2) pesymistyczna O(n^3) zależna od rozkładu plam
-
-from zad3testy import runtests
-
 
 def getSum(T, w, k, L, col):  # sumujemy wszystkie połączone w plany elementy
     n = len(T)
@@ -65,5 +128,4 @@ def plan(T):
         currPoz = miejsce_tankowania
 
     return result
-
-runtests(plan)
+"""

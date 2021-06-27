@@ -1,107 +1,49 @@
+"""
+Niech p będzie wskaźnikiem na niepustą listę odsyłaczową zawierającą parami różne liczby rzeczy-
+wiste a 1 , a 2 , . . . , a n (lista nie ma wartownika). Mówimy, że lista jest k-chaotyczna jeśli dla każde-
+go elementu zachodzi, że po posortowaniu listy znalazłby się na pozycji różniącej się od bieżącej
+o najwyżej k. Tak więc 0-chaotyczna lista jest posortowana, przykładem 1-chaotycznej listy jest
+1, 0, 3, 2, 4, 6, 5, a (n − 1)-chaotyczna lista długości n może zawierać liczby w dowolnej kolejności.
+Proszę zaimplementować funkcję SortH(p,k), która sortuje k-chaotyczną listę wskazywaną przez p.
+Funkcja powinna zwrócić wskazanie na posortowaną listę. Algorytm powinien być jak najszybszy
+oraz używać jak najmniej pamięci (w sensie asymptotycznym, mierzonym względem długości n
+listy oraz parametru k). Proszę oszacować jego złożoność czasową dla k = Θ(1), k = Θ(log n) oraz
+k = Θ(n).
+"""
+
+
 from zad2testy import runtests
 #Jakub Młocek
-#zlozonosc nlogn
-#algortym to standartowy quikersort sortujacy liste jednokierunkowa
+#Using insertion sort on list. Gives us O(n * k) complexity where n is num of elements and k is the
+#distance beteween element in sorted and unsorted list
+#k = O(1) we have O(n)
+#k = O(logn) we have O(nlogn)
+#k = O(n) we have O(n^2)
 
 class Node:
   def __init__(self):
     self.val = None     
     self.next = None 
-
-def tab2list( A ):
-  H = Node()
-  C = H
-  for i in range(len(A)):
-    X = Node()
-    X.value = A[i]
-    C.next = X
-    C = X
-  return H.next
-
-
-def printlist( L ):
-  while L != None:
-    print( L.val, "->", end=" ")
-    L = L.next
-  print("|")
-
-def partition( L ):
-    if L == None:
-        return None
-    x = L.val
-    lo_cpy = lower = None
-    eq_cpy = equal = None
-    hi_cpy = higher = None
-    curr = L
-
-    while curr:
-        tmp = curr
-        tmp = tmp.next
-        if curr.val < x:
-            if lower != None:
-                lower.next = curr
-                lower = lower.next
-                lower.next = None
-            else:
-                lower = curr
-                lo_cpy = lower
-                lower.next = None
-        elif curr.val == x:
-            if equal != None:
-                equal.next = curr
-                equal = equal.next
-                equal.next = None
-            else:
-                equal = curr
-                eq_cpy = equal
-                equal.next = None
-        else:
-            if higher != None:
-                higher.next = curr
-                higher = higher.next
-                higher.next = None
-            else:
-                higher = curr
-                hi_cpy = higher
-                higher.next = None
-        curr = tmp
-
-    #lower.next = eq_cpy
-    #equal.next = hi_cpy
-
-    return lo_cpy, eq_cpy, hi_cpy
-
-
-
-
-def quickersort(L):
-    lower, equal, higher = partition(L)
-
-    end_of_mid = equal
-    while end_of_mid.next:
-        end_of_mid = end_of_mid.next
-
-    start = None
-    end = None
-    if lower:
-        start_l, end_l = quickersort(lower)
-        end_l.next = equal
-        start = start_l
-    else:
-        start = equal
-
-    if higher:
-        start_h, end_h = quickersort(higher)
-        end_of_mid.next = start_h
-        end = end_h
-    else:
-        end = end_of_mid
-
-    return start, end
-
-    
+ 
 
 def SortH(p,k):
-    return quickersort(p)[0]
-
+    L = p
+    if L == None:
+        return None
+    sortedlist = L
+    L = L.next
+    sortedlist.next = None
+    while L !=  None:
+        curr = L
+        L = L.next
+        if curr.val < sortedlist.val:
+            curr.next = sortedlist
+            sortedlist = curr
+        else:
+            search = sortedlist
+            while search.next != None and curr.val > search.next.val:
+                search = search.next
+            curr.next = search.next
+            search.next = curr
+    return sortedlist
 runtests( SortH ) 

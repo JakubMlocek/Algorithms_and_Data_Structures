@@ -1,4 +1,5 @@
 #insertion sort on lists
+#O(n*k) where k is the distance between element in sorted and unsorted list 
 def insertion_sort( L ): 
     if L == None:
         return None

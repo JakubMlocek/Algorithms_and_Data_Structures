@@ -15,8 +15,8 @@ def partition(A, p, r):
 def quicksort(A, p ,r): #basic
     if p < r:
         q = partition(A, p, r)
-        quicksort_rek(A, p, q - 1)
-        quicksort_rek(A, q + 1, r)
+        quicksort(A, p, q - 1)
+        quicksort(A, q + 1, r)
 
 
 def quicksort_it(A, p, r): #using not more than logn additional storage

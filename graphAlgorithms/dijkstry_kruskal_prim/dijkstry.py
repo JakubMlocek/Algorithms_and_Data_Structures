@@ -9,7 +9,7 @@ G =[[0,1,5,0,0],
     [0,7,0,0,1],
     [0,8,3,1,0]]
 """
-G = [[0, 4, 0, 0, 0, 0, 0, 8, 0],
+G =     [[0, 4, 0, 0, 0, 0, 0, 8, 0],
         [4, 0, 8, 0, 0, 0, 0, 11, 0],
         [0, 8, 0, 7, 0, 4, 0, 0, 2],
         [0, 0, 7, 0, 9, 14, 0, 0, 0],
@@ -46,11 +46,11 @@ def dijkstryMatrix( G, s ):
     print("P: ", Parent)
 
 
-def getMinVertex(isAlready, distance):
+def getMinVertex(processed, distance):
     _min = float('inf')
     u = None
     for i in range(len(distance)):
-        if not isAlready[i] and _min > distance[i]:
+        if not processed[i] and _min > distance[i]:
             _min = distance[i]
             u = i
     return u
@@ -62,13 +62,13 @@ def dijkstryMatrixWithoutPQ( G, s ):
             Parent[v] = u
 
     n = len(G)
-    isAlready = [False] * n
+    processed = [False] * n
     D = [inf] * n
     Parent = [-1] * n
     D[s] = 0
     for i in range(n):
-        u = getMinVertex(isAlready, D)
-        isAlready[u] = True
+        u = getMinVertex(processed, D)
+        processed[u] = True
         for v in range(n):
             if G[u][v] > 0:
                 relax(u,v)

@@ -6,6 +6,7 @@ się o najwyżej t, tak że każda litera drugiego słowa jest przypisana dokła
 pierwszego.
 """
 
+from typing import Deque
 from zad1testy import runtests
 #first approach O(n*t)
 def check(x, y, litera, t, isUsed, n):
@@ -24,21 +25,17 @@ def tanagramv1(x, y, t):
             return False
     return True
 
-#second aproach O(n) TO BE COMPLETED
+from collections import deque
+#second aproach O(n) 
 def tanagram(x, y, t):
     n = len(x)
-    litery = [[] for _ in range(26)]
+    litery = [deque() for _ in range(26)] #creating queue for each letter
     for i in range(n):
-        litery[ord(x[i])-ord('a')].append(i)
+        litery[ord(x[i])-ord('a')].append(i) #adding to correct buckets idx of actuall letter
     for i in range(n):
-        if len(litery[ord(y[i])-ord('a')]) == 0:
+        tmp = litery[ord(y[i])-ord('a')].popleft()
+        if  abs(tmp - i) > t: #checking if letters are in correct range
             return False
-        if litery[ord(y[i])-ord('a')][0] - i > t:
-            return False
-        litery[ord(y[i])-ord('a')].pop(0)
-        #print(litery)
     return True
-#x = "kotomysz"
-#y = "tokmysoz"
-#print(tanagram(x,y,2))
+
 runtests( tanagram )

@@ -10,34 +10,65 @@ zatrzymaniu zawsze może zebrać całą ropę z plamy (w cysternie zmieściłaby
 """
 
 from zad3testy import runtests
+from queue import PriorityQueue
 
-def DFS(G):
-    visited = [False] * len(G)
-    parent = [-1] * len(G)
-    def DFSvisit(G, u):
-        visited[u] = True
-        for each in G[u]:
-            if not visited[each]:
-                parent[each] = u
-                DFSvisit(G, each)
-
-    for each in range(len(G)):
-        if not visited[each]:
-            DFSvisit(G, each)
-
-def transformToGraph(T):
+def neighbList(T, y, x):
     n = len(T)
-    m = len(T[0])
-    #T[i][j] --> A[i * m + j]
-    A = [[] * (n * m + 1)]
+    neigh = []
+    kiery = [-1,0,1,0]
+    kierx = [0,-1,0,1]
+
+    for i in range(4):
+        newy = y + kiery[i]
+        newx = x + kierx[i]
+        if newy >= 0 and newy < n and newx >= 0 and newx < n:
+            if T[newy][newx] == 1:
+                neigh.append((y + kiery[i], x + kierx[i]))
+    return neigh
+
+def DFS(G, y, x):
+    sum = 0
+    def DFSvisit(G, y, x):
+        nonlocal sum
+        G[y][x] = 0
+        sum += 1
+        for each in neighbList(G, y, x):
+            if T[each[0]][each[1]] == 1:
+                DFSvisit(G, each[0], each[1] )
+
+    neigh = neighbList(G, y, x)
+    for each in neigh:
+        if G[each[0]][each[1]] == 1:
+            DFSvisit(G, each[0],each[1])
+    return sum
+
+def concatenatedFuel(T):#"zbieramy" ropę do tablicy jednowymiarowej za pomoca dfs
+    w = [0] * len(T)
+    for i in range(len(T)):
+        w[i] = DFS(T, 0, i)
+    return w
      
+def plan(T): #TO BE DONE
+    n = len(T)
+    fuel = concatenatedFuel(T)
+    Q = PriorityQueue()
+    coverage = fuel[0]
+    prevpoz = 0
+    result = [0]
+    while prevpoz + coverage <= n - 1:
+        print(prevpoz, "  ", coverage)
+        currpoz = prevpoz + 1
+        for i in range(coverage):
+            if fuel[currpoz] != 0:
+                Q.put(( -1 * (coverage - (currpoz - prevpoz) + fuel[currpoz]), currpoz))
+                currpoz += 1
+        coverage, station = Q.get()
+        coverage *= -1
+        result.append(station)
+        prevpoz = currpoz  
+    return result
 
-def plan(T):
-    #"zbieramy" ropę do tablicy jednowymiarowej
-
-
-T = [
-    [1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 0, 1],
+T = [[1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 0, 1],
     [1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 0, 1],
     [0, 0, 1, 0, 1, 0, 1, 0, 1, 1, 1, 1],
     [0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0],
@@ -51,7 +82,7 @@ T = [
     [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
 ]
 
-
+print(plan(T))
 #runtests(plan)
 
 

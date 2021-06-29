@@ -9,6 +9,15 @@ Proszę opisać, zaimplementować i oszacować złożoność algorytmu znajdowan
 w grafie z wykorzystaniem mechanizmu dwumilowych butów.
 """
 
+#We use dijkstra algorithm for finding the shortest path. 
+# We cover 3 posibilities:
+#-foot foot
+#-foot shoes 
+#-shoes foot
+#case foot foot is natural
+#case shoes foot is also natural
+#in case to calculate foot shoes we use third loop to look "forward" and calculate next edge
+
 #O(n^3) 
 from zad3testy import runtests
 from math import inf
@@ -51,12 +60,6 @@ def dijkstry( G, s ):
 def jumper(G, s, w):
     return min(dijkstry(G, s)[w])
 
-G = [[0, 10, 1, 0],
-    [10, 0, 10, 0],
-    [1, 10, 0, 2],
-    [0, 0, 2, 0]]
-
-#print(jumper(G,0,3))
 
 runtests(jumper)
 

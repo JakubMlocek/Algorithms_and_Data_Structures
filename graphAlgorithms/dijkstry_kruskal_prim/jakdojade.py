@@ -18,7 +18,7 @@ funkcja jak dojade(G, P, 5, 0, 2) powinna zwrócić [0,3,2]. Dla tych samych tab
 jak dojade(G, P, 6, 0, 2) powinna zwrócić [0,1,2], natomiast jak dojade(G, P, 3, 0, 2)
 powinna zwrócić None.
 """
-
+from zad1testy import runtests
 from queue import PriorityQueue
 
 def jak_dojade(G, stacje, d, s, t):
@@ -78,4 +78,5 @@ G = [[-1,1,-1,3,3,-1,-1],
     [-1,-1,-1,-1,-1,-1,-1]]
 
 P = [0,1,5]
-print(createPath(G,P,4,0,6))
+
+runtests(createPath)

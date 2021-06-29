@@ -48,6 +48,7 @@ def concatenatedFuel(T):#"zbieramy" ropę do tablicy jednowymiarowej za pomoca d
         w[i] = DFS(T, 0, i)
     return w
      
+
 def plan(T): #TO BE DONE
     n = len(T)
     fuel = concatenatedFuel(T)
@@ -56,14 +57,12 @@ def plan(T): #TO BE DONE
     prevpoz = 0
     result = [0]
     while prevpoz + coverage <= n - 1:
-        print(prevpoz, "  ", coverage)
         currpoz = prevpoz + 1
         for i in range(coverage):
             if fuel[currpoz] != 0:
-                Q.put(( -1 * (coverage - (currpoz - prevpoz) + fuel[currpoz]), currpoz))
+                Q.put(((coverage - (currpoz - prevpoz) + fuel[currpoz]), currpoz))
                 currpoz += 1
         coverage, station = Q.get()
-        coverage *= -1
         result.append(station)
         prevpoz = currpoz  
     return result
@@ -82,8 +81,7 @@ T = [[1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 0, 1],
     [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
 ]
 
-print(plan(T))
-#runtests(plan)
+runtests(plan)
 
 
 

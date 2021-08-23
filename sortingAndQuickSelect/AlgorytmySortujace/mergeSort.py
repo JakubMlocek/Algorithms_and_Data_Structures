@@ -1,6 +1,6 @@
 #merge sort complexity O(nlogn)
 
-def mergeSort(T,l,p):
+def mergeSort(T, l, p):
     if l - p >= 0:
         return
     sr = (l + p) // 2 #dzielimy tablice polowe

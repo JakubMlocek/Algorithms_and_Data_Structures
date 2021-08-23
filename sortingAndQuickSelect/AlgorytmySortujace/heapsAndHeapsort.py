@@ -2,8 +2,7 @@
 #heapify complexity O(logn)
 #buildheap complexity O(nlogn) --> O(n)
 
-#TO BE DONE HEAP MIN !!!!
-
+ 
 def left(i):
      return 2*i + 1
 
@@ -83,6 +82,8 @@ def pop_from_heap_max( A ):
 
 T = [9,3,1,5,3,12,34,6,3,1,35,76]
 heapsort_min( T )
+print(T)
+heapsort_max( T )
 print(T)
 
 

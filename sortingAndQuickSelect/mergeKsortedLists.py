@@ -9,7 +9,7 @@ poźniej bierzemy element minimalny z kopca i dodajemy do niego kolejny elemnt z
 naprawiamy kopiec. O(log(k))'''
 
 
-def heapify(T, n, i):   # O(nlogn)
+def heapify(T, n, i):   
     l = 2 * i + 1  # lewy
     r = 2 * i + 2  # prawy
     m = i

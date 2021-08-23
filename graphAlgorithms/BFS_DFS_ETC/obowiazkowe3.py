@@ -4,9 +4,6 @@ wybieramy w n^2 dowolne dwa wierzchołki a nastepnie poprzez macierz krwaędzi s
 jeśli >= 2 to tworzą cykl długosci 4
 """
 
-
-###chuja w to
-
 graph = [[0, 1, 0, 1, 0],
          [1 ,0 ,1 ,0, 1],
          [0, 1, 0, 1, 0],

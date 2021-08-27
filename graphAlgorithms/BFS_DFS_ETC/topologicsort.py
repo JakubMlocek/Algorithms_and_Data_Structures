@@ -1,5 +1,5 @@
 
-G = [[1, 2],
+G =     [[1, 2],
          [2, 4],
          [],
          [],
@@ -9,22 +9,16 @@ G = [[1, 2],
 
 def topologycSort(G):
     def DFSvisit(G, u):
-        nonlocal time
-        time += 1
-        #u.entry_time = time
         visited[u] = True
 
         for each in G[u]:
             if not visited[each]:
                 parent[each] = u
                 DFSvisit(G, each)
-        time += 1
-        #u.process_time = time
-        topologycklySorted.insert(0,u)
+        topologycklySorted.insert(0,u) #better to use append and than reverse whole array
 
     visited = [False] * len(G)
     parent = [None] * len(G)
-    time = 0
     topologycklySorted = []
     for each in range(len(G)):
         if not visited[each]:

@@ -24,7 +24,7 @@ def hungryFrog( A ):
                 while jump < n and energy >= jump - currpoz:
                     DP[jump][energy - jump + currpoz + A[jump]] = min(DP[jump][energy - jump + currpoz + A[jump]], DP[currpoz][energy] + 1)
                     jump += 1
-
+    print(DP)
     return min(DP[n-1])
 
 A1 = [2,2,1,0,0,0]
@@ -37,6 +37,7 @@ A4 = [4,2,2,2,1,2,1,1,0]
 R4 = 3
 A5 = [4,3,0,1,2,0,1,0]
 R5 = 2
+A6 = [1,2,3]
 
-print(hungryFrog(A3))
+print(hungryFrog(A6))
  

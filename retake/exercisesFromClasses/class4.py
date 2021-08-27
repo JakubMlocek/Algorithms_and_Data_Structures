@@ -75,3 +75,31 @@ Proszę podać możliwie jak najszybszy algorytm, który znajduje indeksy i oraz
 A[i + 1], . . . , A[j] występują wszystkie k kolorów oraz wartość j − i jest minimalna 
 (innymi słowy, szukamy najkrótszego przedziału z wszystkimi kolorami).
 """
+
+def shortestInterval(A, k):
+    n = len( A )
+    colorCount = [0] * 10
+    counter = 0
+    i = 0
+    j = -1
+    min_j = min_i = None
+    shortest = n
+    while i < n and j < n - 1:
+        print(i, " " ,j)
+        if counter < k:
+            if j == n:
+                return min_i, min_j
+            j += 1
+            if colorCount[A[j]] == 0:
+                counter += 1
+            colorCount[A[j]] += 1
+        
+        if counter == k:
+            if j - i < shortest:
+                min_j, min_i = j, i
+                shortest = j - i
+            colorCount[A[i]] -= 1
+            if colorCount[A[i]] == 0:
+                counter -= 1
+            i += 1
+    return min_i, min_j

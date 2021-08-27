@@ -70,7 +70,7 @@ def dijkstryMatrixWithoutPQ( G, s ):
         u = getMinVertex(processed, D)
         processed[u] = True
         for v in range(n):
-            if G[u][v] > 0:
+            if G[u][v] > 0 and not processed[v]:
                 relax(u,v)
     
     print("D: ",D)

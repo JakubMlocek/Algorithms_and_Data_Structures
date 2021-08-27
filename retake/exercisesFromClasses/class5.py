@@ -99,13 +99,64 @@ def lcs(X , Y):
     # L[m][n] contains the length of LCS of X[0..n-1] & Y[0..m-1]
     return L[m][n]
 
+
 """
-Zadanie 6. (wydawanie monet) Mamy daną tablicę z nominałami monet stosowanych w pewnym dziw- nym kraju,
+Zadanie 5. (maximin) Rozważmy ciąg (a0,...,an−1) liczb naturalnych. 
+Załóżmy, że został podzielony na k spójnych podciągów: (a0,...,al1), (al1+1,...,al2),...,(alk1+1,...,an−1). 
+Przez wartość i-go podciągu rozumiemy sumę jego elementów a przez najgorszy podciąg rozumiemy podciąg o 
+najmniejszej wartości (roz- strzygając remisy w dowolny sposób). Wartością podziału jest wartość jego 
+najgorszego podciągu. Zadanie polega na znalezienie podziału ciągu (a0,...,an−1) o maksymalnej wartości.
+"""
+
+
+#HELP!!!!!!!
+#DP[i][t] = max split using i elements from table and t splits 
+#DP[i][t] = min ( DP[i - o][t - 1], sum of C[o + 1]...C[i])
+
+def maximin( C, k ):
+   n = len(C)
+   P = [0] * n
+   for i in range(1, n):
+      P[i] = P[i - 1] + C[i] #creating prefix sums
+   
+   DP = [[float('inf') for _ in range(k + 1)] for _ in range(n)]
+
+   for i in range(n):
+      for o in range( i ):
+         for t in range( 1, k + 1 ):  
+            DP[i][t] = min( DP[i - o][t - 1], P[i] - P[o] )
+      
+   for each in DP:
+      print(each)
+
+A = [1, 2, 3, 2, 4, 6, 11, 1, 12, 13, 2, 3, 0]
+B = [12, 0, 0, 12, 0, 0, 12, 0, 0, 12, 0, 0]
+C = [100, 99, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+k = 4
+
+   
+
+
+   
+
+   
+   
+
+
+
+
+"""
+Zadanie 6. (wydawanie monet) Mamy daną tablicę z nominałami monet stosowanych w pewnym dziwnym kraju,
 oraz kwotę T . Proszę podać algorytm, który oblicza minimalną ilość monet potrzebną do wydania kwoty T 
 (algorytm zachłanny,
 wydający najpierw największą monetę, nie działa: dla monet 1, 5, 8 wyda kwotę 15 jako 8+5+1+1 zamiast 5+5+5).
 """
 
+#DP[i] = ilosc potrzebnych monet do wymiany kwoty i
+
+
+def moneyExchange( nominals, amount ):
+   pass
 
 """
 Zadanie 7. (wędrówka po szachownicy) Dana jest szachownica A o wymiarach n × n. Szachownica zawiera liczby wymierne. Należy przejść z pola (1,1) na pole (n,n) korzystając jedynie z ruchów “w dół” oraz “w prawo”. Wejście na dane pole kosztuje tyle, co znajdująca się tam liczba. Proszę podać algorytm znajdujący trasę o minimalnym koszcie.
@@ -113,8 +164,29 @@ Zadanie 7. (wędrówka po szachownicy) Dana jest szachownica A o wymiarach n × 
 
 def journey( A ):
    n = len(A)
+   DP = [[float('inf') for _ in range(n)] for _ in range(n)]
+
+   DP[0][0] = A[0][0]
+
+   for i in range(1,n):
+      DP[0][i] = DP[0][i - 1] + A[0][i]
+      DP[i][0] = DP[i - 1][0] + A[i][0]
+
    for row in range(1,n):
       for col in range(1,n):
-         A[row][col] = min(A[row - 1][col], A[row][col - 1])
-   return A[n-1][n-1]
+         DP[row][col] = min(DP[row - 1][col], DP[row][col - 1]) + A[row][col]
    
+   for each in DP:
+      print(each)
+
+   return DP[n - 1][n - 1]
+   
+A = [[1, 100, 0, 0],
+     [99, 2, 1, 0],
+     [1, 2, 1, 0],
+     [1, 2, 99, 2]]
+
+B = [[4, 0, 2, 1],
+     [0, 0, 2, 1],
+     [1, 1, 0, 4],
+     [0, 3, 0, 1]]

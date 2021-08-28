@@ -1,50 +1,42 @@
 import copy
 
-T1 = [0.1, 0.5, 0.2, 0.78, 0.01 ]
-T2 = [0.9, 0.7, 0.7, 0.5, 0.3, 0.2, 0.9]
-T3 = [0.1, 0.9,0.2,0.8,0.3,0.7,0.4,0.6]
+P1 = [123, 890, 688, 587, 257, 246]
+L1 = 767
 
-D1 = [2**x for x in T1]
-D2 = [2**x for x in T2]
-D3 = [3**x for x in T3]
+P2 = [587, 990, 257, 246, 668, 132]
+L2 = -1
 
-TESTS = [(D1,2), (D2,2), (D3,3)]
+P3 = [100, 210, 620, 144, 445, 555]
+L3 = 520
 
+P4 = [111, 222]
+L4 = -1
 
+TESTS = [(P1, L1),
+         (P2, L2),
+         (P3, L3),
+         (P4, L4)]
 
-def T2S( T ):
-    return " ".join([ "%.3f" % x for x in T ] )
+def isok(P, result, expected):
+    return result == expected
 
-
-def runtests( f ):
+def runtests(f):
     OK = True
-    for (T,a) in TESTS:
-        BAD = False
-        T1 = copy.deepcopy( T )
-        T2 = copy.deepcopy( T )
-        T.sort()
-        print( "tablica            :", T2S(T2) )
-        print( "posortowana tablica:", T2S(T) )
-        res = f(T1,a)
-        print( "wynik programu     :", T2S(res) )
-
-        if len(res) != len(T):
-            OK = False
-            print("Tablice sa roznych dlugosci")
-            continue
-
-        for i in range(len(T)):
-            if abs(T[i] - res[i]) > 0.001:
-                   BAD = True
-                   break
-        if BAD:
-            OK = False
-            print("Blad!")
-
+    for (P, L) in TESTS:
+        res = f(copy.deepcopy(P))
         print("----------------------")
+        print("P =", P)
+        print("otrzymany wynik  =", res)
+        print("oczekiwany wynik =", L)
+
+        if not isok(P, res, L):
+            print("Blad!")
+            OK = False
+        else:
+            print()
+    print("----------------------")
 
     if OK:
-        print( "OK!" )
+        print("OK!")
     else:
-        print( "Bledy!" )
-            
+        print("Bledy!")

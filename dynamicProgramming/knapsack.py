@@ -72,7 +72,7 @@ P = [1,5,3,5]
 
 #zlozonosc O(n * MaxW * MaxH)
 
-def knapsack(W, H, P, MaxW, MaxH): =
+def knapsack(W, H, P, MaxW, MaxH): 
     n = len(W)
     DP = [[[0 for _ in range(MaxH + 1)] for _ in range(MaxW + 1)] for _ in range(n)]
     for w in range(MaxW + 1):
@@ -96,16 +96,6 @@ def getsolution(F, W, H, P, i, w, h):
        return getsolution(F, W, H, P, i - 1, w - W[i], h - H[i]) + [i]
    return getsolution(F, W, H, P, i - 1, w, h)
 
-
-
-def getsolution(F, W, H, P, i, w, h):
-   if i == 0:
-       if w >= W[0] and h >= H[0]:
-           return [0]
-       return []
-   if w >= W[i] and h >= H[i] and F[i][w][h] == F[i - 1][w - W[i]][h - H[i]] + P[i]:
-       return getsolution(F, W, H, P, i - 1, w - W[i], h - H[i]) + [i]
-   return getsolution(F, W, H, P, i - 1, w, h)
 
 P = [3,5,1,2,1,5]
 W = [1,2,4,3,2,1]

@@ -1,4 +1,3 @@
-from math import inf
 """
 Zadanie 1.
 Pewna kraina składa się z wysp pomiędzy którymi istnieją połączenia lotnicze, promowe oraz mosty.
@@ -20,9 +19,8 @@ G1 = [ [0,5,1,8,0,0,0 ],
 [0,0,8,1,0,5,0 ] ]
 funkcja islands(G1, 5, 2) powinna zwrócić wartość 13.
 """
-from zad1testy import runtests
 
-
+#dijkstry complexity O(V^2)
 def getMinVertex(processed, distance):
     _min = float('inf')
     u = None
@@ -52,7 +50,7 @@ def dijkstryMatrix( G, s, e ):
 
     n = len(G)
     processed = [False] * n
-    D = [[inf,inf,inf] for _ in range(n)] #distances to vertex by 3 transports /bridge/prom/flight/
+    D = [[float('inf'),float('inf'),float('inf')] for _ in range(n)] #distances to vertex by 3 transports /bridge/prom/flight/
     Parent = [-1] * n #using which transport we arrived to i vertex
     D[s] = [0,0,0]
     for i in range(n):
@@ -65,7 +63,7 @@ def dijkstryMatrix( G, s, e ):
     return min(D[e])
 
 def islands(G, A, B):
-    if dijkstryMatrix(G, A, B) == inf:
+    if dijkstryMatrix(G, A, B) == float('inf'):
         return None
     return dijkstryMatrix(G, A, B)
 
@@ -79,7 +77,7 @@ G1 = [ [0,5,1,8,0,0,0 ],
 
 #print(dijkstryMatrix(G1,5,2))
 
-runtests( islands ) 
+ 
 
 
 """
@@ -104,9 +102,7 @@ Uzasadnij poprawność zaproponowanego rozwiązania i oszacuj jego złożoność
 
 
 def opt_sum(tab):
-
     # funkcje zwracające liczbę o odpowiednio mniejszej/większej wartości bezwzględnej
-
     def min_abs_val(a,b):
         if abs(a) < abs(b) : 
             return a
@@ -135,7 +131,6 @@ def opt_sum(tab):
 
     # rozważamy coraz dłuższe przedziały
     for length in range(1,n):
-
         for start in range(n-length):
             end = start + length
 
@@ -160,3 +155,63 @@ def opt_sum(tab):
 
     return abs(memo[0][n-1])
     
+
+
+"""
+[2pkt.] Zadanie 3.
+Szablon rozwiązania: zad2.py
+Pewien eksperyment fizyczny daje w wyniku liczby rzeczywiste postaci a^x
+, gdzie a to pewna stała większa od 1 (a > 1) zaś x to liczby rzeczywiste rozłożone równomiernie na przedziale [0, 1].
+Napisz funkcję fast sort, która przyjmuje tablicę liczb z wynikami eksperymentu oraz stałą a i
+zwraca tablicę z wynikami eksperymentu posortowanymi rosnąco. Funkcja powinna działać możliwie jak najszybciej. Uzasadnij poprawność zaproponowanego rozwiązania i oszacuj jego złożoność
+obliczeniową. Nagłówek funkcji fast sort powinien mieć postać:
+
+def fast_sort(tab, a):
+"""
+
+import math
+
+
+#Bucket sort complexity O(n + k)
+def insertionSort(T):
+    n = len(T)
+    for i in range(1, n):
+        key = T[i]
+        idx = i - 1
+        while idx >= 0 and T[idx] > key:
+            T[idx + 1] = T[idx]
+            idx = idx - 1
+        T[idx + 1] = key
+    return T
+
+def bucket_sort(A):
+    n = len(A)
+    _max = -float('inf')
+    for each in A:
+        if each[0] > _max:
+            _max = each[0]
+    
+    norm = _max + 1 #zamieniamy liczby na przedział [0,1)
+     
+    buckets = [[] for _ in range(n)]
+
+    for num in A:
+        normedNum = num[0] / norm
+        bucket_idx = int(n * normedNum) #przydzielamy odpowiedni kubełek
+        buckets[bucket_idx].append(num)
+
+    for i in range(n):
+        buckets[i] = insertionSort(buckets[i])
+        
+    out = []
+    for i in range(n):
+        out += buckets[i]
+    return out
+
+
+def fast_sort(tab, a):
+    X = [(math.log(each, a), each) for each in tab] #creating a touple carrying an aproximetly X value and proper a^x value
+    X = bucket_sort(X) #sort by X-es using bucket sort
+    for i in range(len(X)):
+        X[i] = X[i][1] #back to original numbers
+    return X

@@ -1,3 +1,19 @@
+#MAX FLOW
+"""
+Zadanie 2. (spójność krawędziowa) Dany jest graf nieskierowany G = (V,E).
+Mówimy, że spójność krawędziowa G wynosi k jeśli usunięcie pewnych k krawędzi powoduje, że G jest niespójny, 
+ale usunięcie dowolnych k − 1 krawędzi nie rozspójnia go. Proszę podać algorytm, który oblicza spójność krawędziową danego grafu.
+"""
+
+#We choose a vertex. Than we do a max flow algorithm with every other vertex. 
+
+"""
+Zadanie 5. (rozłączne ścieżki) Dany jest graf skierowany G = (V,E) oraz wierzchołki s i t. Proszę zaproponować algorytm znajdujący maksymalną liczbę rozłącznych (wierzchołkowo) ścieżek między s i t.
+"""
+
+#
+
+#BST
 """
 Zadanie 3. (geny) W pewnym laboratorium genetycznym powstał ciąg sekwencji DNA. 
 Każda sekwencja to pewien napis składający się z symboli G, A, T, i C. 

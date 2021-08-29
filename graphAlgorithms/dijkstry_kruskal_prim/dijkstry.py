@@ -63,7 +63,7 @@ def dijkstryMatrixWithoutPQ( G, s ):
 
     n = len(G)
     processed = [False] * n
-    D = [inf] * n
+    D = [float('inf')] * n
     Parent = [-1] * n
     D[s] = 0
     for i in range(n):

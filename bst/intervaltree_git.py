@@ -14,8 +14,6 @@ Modified by Måns Magnusson
 Copyright (c) 2014 __MyCompanyName__. All rights reserved.
 """
 
-import sys
-import os
 import pprint
 
 class IntervalTree:

@@ -114,4 +114,89 @@ Dana jest tablica T zawierająca N liczb naturalnych. Z pozycji a można przesko
 Przykład Dla tablicy T = [123,890,688,587,257,246] wynikiem jest liczba 767, a dla tablicy T = [587,990,257,246,668,132] wynikiem jest liczba -1.
 """
 
-s
+from zad3testy import runtests
+
+def giveNums( num ): #returning in array all digits of num 
+    result = []
+    while num > 0:
+        result.append( num % 10 )
+        num //= 10
+    result.reverse()
+    return result
+
+def createGraph( P ):
+    n = len(P)
+    T = [giveNums( num ) for num in P] #table having all digits for every num in P
+    print(T)
+    G = [[0 for _ in range(n)] for _ in range( n )] #creating matrix reprezentation of Graph
+    for u in range(n):
+        for v in range(n):
+            if u != v:
+                for digitU in T[u]:
+                    for digitV in T[v]:
+                        if digitU == digitV: #if both numbers have least 1 familiiar digit
+                            G[u][v] = abs(P[u] - P[v])
+                            G[v][u] = abs(P[u] - P[v])
+
+    return G
+
+
+def getMinVertex(processed, distance):
+    _min = float('inf')
+    u = None
+    for i in range(len(distance)):
+        if not processed[i] and _min > distance[i]:
+            _min = distance[i]
+            u = i
+    return u
+
+def dijkstry( G, s, e ):
+    def relax(u, v):
+        if D[v] > D[u] + G[u][v]:
+            D[v] = D[u] + G[u][v]
+            Parent[v] = u
+
+    n = len(G)
+    processed = [False] * n
+    D = [float('inf')] * n
+    Parent = [-1] * n
+    D[s] = 0
+    for i in range(n):
+        u = getMinVertex(processed, D)
+        if u == None:
+            break
+        processed[u] = True
+        for v in range(n):
+            if G[u][v] > 0 and not processed[v]:
+                relax(u,v)
+    
+    return D[e]
+
+def find_cost(P):
+    n = len(P)
+    G = createGraph(P)
+    _min = float('inf')
+    _max = -float('inf')
+    minIDX = None
+    maxIDX = None
+
+    for i in range( n ):
+        if P[i] > _max:
+            _max = P[i]
+            maxIDX = i
+        
+        if P[i] < _min:
+            _min = P[i]
+            minIDX = i
+
+    res = dijkstry(G, minIDX, maxIDX)
+    
+    if res == float('inf'):
+        return -1
+    else:
+        return res
+
+
+T = [123,890,688,587,257,246]
+#print(find_cost( T ))
+runtests(find_cost) 

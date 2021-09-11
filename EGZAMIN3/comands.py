@@ -1,0 +1,2 @@
+https://drive.google.com/file/d/11d4cZZi_B6TK8j3odSWT607bXUag8S0k/view?usp=sharing
+wget --no-check-certificate 'https://docs.google.com/uc?export=download&id=11d4cZZi_B6TK8j3odSWT607bXUag8S0k' -O zadanie.py

@@ -19,18 +19,6 @@ import pprint
 class IntervalTree:
     
     def __init__(self, features, start, end):
-        """
-        data: an array of elements where each element contains start coodinate, end coordinate, and element id.
-        start: position of the start position of the element range. Allways 1:based
-        end: position of the end position of the element range. Allways 1:based
-        
-        start index is allways 0 and end index allways 1
-        for example, a reference genome of a million base pairs with the following features:
-            features = [[20,400,'id01'],[1020,2400,'id02'],[35891,29949,'id03'],[900000,900000,'id04'],[999000,999000,'id05']]
-        to make a tree:
-            myTree = IntervalTree(features, 0, 1, 1, 1000000)
-        """
-        
         self.start = start
         self.end = end
         self.elementary_intervals = self.get_elementary_intervals(features)
@@ -41,13 +29,8 @@ class IntervalTree:
     def get_elementary_intervals(self, features):
         """Generates a sorted list of elementary intervals"""
         coords = []
-        try:
-            for interval in features:
-                if len(interval) != 3:
-                    raise SyntaxError('Interval malformed %s. Allways specify start and end position for interval.' % str(interval))
-                coords.extend([interval[0],interval[1]])    
-        except IndexError:
-            raise SyntaxError('Interval malformed %s. Allways specify start and end position for interval.' % str(interval))
+        for interval in features:
+            coords.extend([interval[0],interval[1]])    
         coords = list(set(coords))
         coords.sort()
         return coords
@@ -87,12 +70,8 @@ class IntervalTree:
 
     def pt_within(self, pt, subject):
         """Accessory function to check if a point is within a range"""
-        try:
-            if pt >= int(subject[0]) and pt <= int(subject[1]):
-                return True
-        except ValueError:
-            raise ValueError('Interval start and stop has to be integers. %s' % str(subject))
-
+        if pt >= int(subject[0]) and pt <= int(subject[1]):
+            return True
         return False
 
     def is_within(self, query, subject):

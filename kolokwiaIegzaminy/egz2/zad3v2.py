@@ -10,14 +10,12 @@ def add_tuples(t1, t2):
         t1[2] + t2[2]
     )
 
-
 def depth(node, S):
     cnt = 0
     while node < S:
         node *= 2
         cnt += 1
     return cnt
-
 
 def get_init_tree(n):
     S = 1

@@ -3,7 +3,6 @@
 #Z podanych przedzialow tworzymy graf. Krawedz z u do v istnieje
 #jezeli koniec u jest poczatkiem v. Nastepnie dla kazdego z przedzialow zaczynajacych
 # sie w x i konczacym sie w y wywolujemy zmodyfikowany algorytm DFS dodajacy nasze przedzialy.
-#O(n ^ 3)
 
 from zad1testy import runtests
 
@@ -48,7 +47,6 @@ def intuse( I, x, y ):
     for start in starts:
         for end in ends:
             DFS( G, start, end, intervals)
-
     return intervals
 
 

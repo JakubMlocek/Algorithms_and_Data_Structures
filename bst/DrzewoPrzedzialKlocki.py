@@ -1,3 +1,6 @@
+
+
+
 def mergeUnique( A, B):
     tab = A + B
     tab.sort()
@@ -8,8 +11,6 @@ def mergeUnique( A, B):
         if tab[i] != tab[i - 1]:
             result.append(tab[i])
     return result
-
-
 
 def parent(i):
     return (i - 1) // 2
@@ -87,7 +88,7 @@ def put_block( l, r, h, T, i ):
 
 
 def get_height( l, r, T, i ):
-    if (T[i][0][0] == l and T[i][0][1] == r) or T[i][2] == 1: #jesli jestesmy calkowiecie w przedziale lub przedzial jest lisciem
+    if (T[i][0][0] == l and T[i][0][1] == r) or T[i][2] == True: #jesli jestesmy calkowiecie w przedziale lub przedzial jest lisciem
         return T[i][1]
 
     else:

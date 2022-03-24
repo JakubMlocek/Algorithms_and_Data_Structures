@@ -25,8 +25,8 @@ def floydWarshal(G):
 #print(floydWarshal(G))
 
 def floydWarshalWithPath(G):
-    P = [[ -1 for  in range(len(G))] for  in range(len(G))]
-    S = [[float('inf') for  in range(len(G))] for  in range(len(G))]
+    P = [[ -1 for _ in range(len(G))] for _ in range(len(G))]
+    S = [[float('inf') for _ in range(len(G))] for _ in range(len(G))]
     for i in range(len(G)):  # Tablica dynamiczna z kosztami przejsc dla każdej pary wierzchołków
         for j in range(len(G)):
             if G[i][j] != 0:
@@ -41,6 +41,7 @@ def floydWarshalWithPath(G):
                 if  S[u][w] > S[u][v] + S[v][w]:
                     S[u][w] = S[u][v] + S[v][w] # jesli koszt z u, w jest mniejszy niż koszt
                     P[u][w] = P[v][w]
+
     for each in S:   # z u do v i z v do w to aktualizujemy tablice
         print(each)
 
@@ -51,7 +52,6 @@ def floydWarshalWithPath(G):
             path.append(v)
             v = P[s][v]
         return path[::-1]
-    print(P)
     print(reconstruction(P,4,3))
 
 G = [
@@ -62,4 +62,4 @@ G = [
     [0, 2, 2, 0, 0],
 ]
 
-floydWarshal(G)
+floydWarshalWithPath(G)

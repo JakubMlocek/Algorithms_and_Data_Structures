@@ -192,32 +192,3 @@ G = [[-1,2,-1,-1,-1,-1,-1,-1,5],
     [-1,-1,-1,-1,-1,1,-1,-1,-1],
     [-1,-1,-1,-1,-1,-1,1,-1,-1],
     [-1,-1,-1,-1,-1,-1,-1,4,-1]]
-
-"""
-Zadanie 7. (problem stacji benzynowych na grafie) Pewien podróżnik chce przebyć trasę z punktu A do punktu B. Niestety jego samochód spala dokładnie jeden litr paliwa na jeden kilometr trasy. W baku mieści się dokładnie D litrów paliwa. Trasa jest reprezentowana jako graf, gdzie wierzchołki to miasta a krawędzie to łączące je drogi. Każda krawędź ma długość w kilometrach (przedstawioną jako licza naturalna). W każdym wierzchołku jest stacja benzynowa, z daną ceną za litr paliwa. Proszę podać algorytm znajdujący trasę z punktu A do punktu B o najmniejszym koszcie. Proszę uzasadnić poprawność algorytmu.
-"""
-
-
-def dijkstry( G, P, s ):
-    def relax(u, v):
-        if D[v] > D[u] + G[u][v]:
-            D[v] = D[u] + G[u][v]
-            Parent[v] = u
-
-    n = len(G)
-    processed = [False] * n
-    D = [inf] * n
-    Parent = [-1] * n
-    D[s] = 0
-    for i in range(n):
-        u = getMinVertex(processed, D)
-        processed[u] = True
-        for v in range(n):
-            if G[u][v] > 0 and not processed[v]:
-                relax(u,v)
-    
-    print("D: ",D)
-    print("P: ", Parent)
-
-def gasoline( G, s, e ):
-    pass

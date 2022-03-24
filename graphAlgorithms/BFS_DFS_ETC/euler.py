@@ -32,10 +32,12 @@ def euler( G ):
     if len(vertex_counter) != len(G): # jeśli liczba wierzchołków użytych w znalezionym cyklu jest różna od liczby wszytskich wierzchołków grafu to zanczy ze jest on niespójny
         return None
     return cycle
+
 n = 21
 G1 = [[1 for _ in range(n)]for i in range(n)]
 for i in range(n):
     G1[i][i] = 0
+
 G = [
      [0, 1, 1, 0, 0, 0],
      [1, 0, 1, 1, 0, 1],
@@ -44,4 +46,4 @@ G = [
      [0, 0, 1, 0, 0, 1],
      [0, 1, 1, 1, 1, 0]
 ]
-print(euler(G1))
+print(euler(G))

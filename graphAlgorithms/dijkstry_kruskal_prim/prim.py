@@ -54,4 +54,5 @@ def primList(G, s): #tobechecked
         processed[v] = True
     
     return parent, processed
-prim(G, 0)
+
+print(prim(G, 0))

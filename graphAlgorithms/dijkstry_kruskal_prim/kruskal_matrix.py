@@ -2,7 +2,7 @@ class Node:
     def __init__(self, val):
         self.val = val
         self.rank = 0
-        self.parent =self
+        self.parent = self
 
 def find(x):
     if x is not x.parent:
@@ -41,5 +41,5 @@ def kruskal(G):
         if not find(v) is find(u): # czy v i u leżą w innych składowych grafu
             union(v, u) # łaczymy zbiory
             A.append((v.val, u.val))
-            weight += t[edge][0]
+            weight += edges[edge][0]
     return weight, A

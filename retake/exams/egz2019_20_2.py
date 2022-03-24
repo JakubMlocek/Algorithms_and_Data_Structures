@@ -111,7 +111,7 @@ def createGraph( A ):
 
 def highway(A):
     n = len( A )
-    G = createGraph( A )
+    G = createGrah( A )
     minDiff = float('inf')
     for u in range(n):
         for v in range(n):

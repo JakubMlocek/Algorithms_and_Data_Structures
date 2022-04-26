@@ -1,7 +1,7 @@
 #complexity O(d( n + k))  k- num of different digits , d = num of digits in numbers
 
 #Radix Sort using counting sort on letters 
-def counting_sort_digits(A,letter_num):
+def counting_sort_letters(A,letter_num):
     k = 26 #zakres alfabetu uwzgledniamy tylko małe
     C = [0] * k
     B = [0]*len(A)
@@ -16,7 +16,7 @@ def counting_sort_digits(A,letter_num):
 
 def radix_sort(A, k):
     for i in range(k - 1, -1, -1):
-        A = counting_sort_digits(A,i)
+        A = counting_sort_letters(A,i)
     return A
 
 

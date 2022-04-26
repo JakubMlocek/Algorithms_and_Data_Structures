@@ -1,6 +1,8 @@
 #basic quickSort function O(nlogn) complexity
 
 def partition(A, p, r):
+    #sr = (p + r)//2
+    #A[sr],A[r] = A[r],A[sr]
     x = A[r]
     i = p - 1
 
@@ -31,8 +33,3 @@ def quicksort_it(A, p, r): #using not more than logn additional storage
             quicksort_it(A, q, r)
             r = q - 1
             
-
-
-T = [4,3,9,123,12,123,1,2,3,5,32,231,25,3,1,134]
-quicksort_it(T,0,len(T) - 1)
-print(T)

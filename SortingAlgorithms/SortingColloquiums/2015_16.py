@@ -1,37 +1,36 @@
 
-###zadanie1
-def SumSort( A, B, n ):
-    partial_sums = [ 0 ] * n
-    print(A)
-    poz = 0
-    for i in range(n*n):
-        if i % n == 0 and i != 0:
-            poz += 1
-        partial_sums[poz] += A[i]
+"""
+Proszę zaimplementować funkcję void SumSort(int A[], int B[], int n). Funkcja ta przyjmuje na wejściu dwie n2-elementowe tablice (A i B) i zapisuje w tablicy B taką permutację elementów z A, że:
+n−1 2n−1 n2−1 􏰁B[i]􏰀 􏰁 B[i]􏰀...􏰀 􏰁 B[i]. i=0 i=n i=n2 −n
+Proszę zaimplementować funkcję SumSort tak, by działała możliwie jak najszybciej. Proszę oszacować i podać jej złożoność czasową.
+"""
+def partition(A, p, r):
+    x = A[r]
+    i = p - 1
 
-    print(partial_sums)
-    for indexB in range(0, n):
-        #znajdujemy najmniejsza sume
-        min_id_of_sum = None
-        min_sum = 999999999
-        for i in range(0, len(partial_sums)):
-            if partial_sums[i] != None and partial_sums[i] < min_sum:
-                min_sum = partial_sums[i]
-                min_id_of_sum = i
+    for j in range(p,r):
+        if A[j] <= x:
+            i += 1
+            A[i], A[j] = A[j], A[i]
 
-        #print(partial_sums)
-        #print(min_id_of_sum)
-        #print(indexB)
-        #kopiujemy elementy najmniejszej sumy na poczatek tablicy b
-        for i in range(n):
-            B[indexB * n + i] = A[min_id_of_sum * n + i]
+    A[i + 1], A[r] = A[r], A[i + 1]
+    return i + 1
 
-        #usuwamy dodana juz sume przez co nie uzyjemy jej i jej el ponownie
-        partial_sums[min_id_of_sum] = None
-        print(partial_sums)
+def quick_select(A, p, r, k):
+    if p == k:
+        return A[k]
+    q = partition(A, p, r)
+    if q == k:
+        return A[k]
+    elif k < q:
+        return quick_select(A, p, q - 1, k)
+    else:
+        return quick_select(A, q + 1, r, k)
 
-    #print(A)
-    print(B)
+def sumSort(A, n):
+    for podzial in range(1,n):
+        quick_select(A, (podzial - 1) * n, len(A) - 1, podzial * n)
+    return A
 
 """
 n = 3

@@ -11,15 +11,16 @@ def partition(A, p, r):
     return i + 1
 
 def quickSelect(A, p, r, k):
-    if p == k:
-        return A[k]
-    q = partition(A, p, r)
-    if q == k:
-        return A[k]
-    elif k < q:
-        return quickSelect(A, p, q - 1, k)
-    else:
-        return quickSelect(A, q + 1, r, k)
+    if p == r:
+        return A[r]
+    if p < r:
+        q = partition(A, p, r)
+        if q == k:
+            return A[k]
+        elif k < q:
+            return quickSelect(A, p, q - 1, k)
+        else:
+            return quickSelect(A, q + 1, r, k)
 
 
 T = [20,1,4,2,10,16,3,5,99,11]

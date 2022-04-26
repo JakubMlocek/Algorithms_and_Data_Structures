@@ -10,7 +10,3 @@ def insertionSort(T):
             idx = idx - 1
         T[idx + 1] = key
     return T
-
-
-T = [1, 9, 5, 6, 7 ,3 ,4 ,2 ,4 ,1 ,5 ,12]
-print(insertionSort(T))

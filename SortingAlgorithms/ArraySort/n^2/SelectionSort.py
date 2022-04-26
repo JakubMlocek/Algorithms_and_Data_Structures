@@ -9,7 +9,3 @@ def selectionSort(T):
             T[i], T[minIdx] = T[minIdx], T[i]
     return T
 
-
-if __name__ == '__main__':
-    tablica = [2, 3, 6, 7, 9, 4, 3, 10, 3, 1]
-    print(selectionSort(tablica))

@@ -31,7 +31,3 @@ def mergeSort(T, l, p):
         j += 1
         indeksT += 1
     return T
-
-T = [4,3,9,123,12,123,1,2,3,5,32,231,25,3,1,134]
-mergeSort(T,0,len(T) - 1)
-print(T)

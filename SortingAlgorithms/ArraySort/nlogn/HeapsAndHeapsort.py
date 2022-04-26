@@ -4,7 +4,7 @@
 
  
 def left(i):
-     return 2*i + 1
+    return 2*i + 1
 
 def right(i):
     return 2*i + 2
@@ -65,7 +65,7 @@ def insert_into_heap_max( A , val):
     i = len(A) - 1
     j = parent(i)
     while A[j] < A[i] and j >= 0:
-        #print("A")
+        print(A)
         A[j], A[i] = A[i], A[j]
         i = j
         j = parent(i)
@@ -76,14 +76,10 @@ def pop_from_heap_max( A ):
     val = A[0]
     n = len( A )
     A[0] , A[n - 1] = A[n - 1], A[0]
-    heapify(A, n - 1, 0)
+    heapify_max(A, n - 1, 0)
     A.pop()
     return val
 
-T = [9,3,1,5,3,12,34,6,3,1,35,76]
-heapsort_min( T )
-print(T)
-heapsort_max( T )
-print(T)
+
 
 

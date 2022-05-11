@@ -1,5 +1,3 @@
-G = [[3], [3,4,5], [4], [0,1,4,5], [2,1,3,5],[3,4,1]]
-
 def DFSwithPath(G):
     def DFSvisit(G, u):
         nonlocal time
